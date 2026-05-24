@@ -28,20 +28,46 @@
         }
 
         .page {
-            position: relative;
             width: 210mm;
             min-height: 297mm;
             margin: 0 auto;
-            background-image: url('{{ asset('images/letterhead/zooma.png') }}');
-            background-size: 100% 100%;
-            background-repeat: no-repeat;
+            background: #fff;
         }
 
-        /* Content area encima del fondo */
+        /* Header con logo */
+        .doc-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 40px 14px 40px;
+            border-bottom: 3px solid #1a6e7a;
+        }
+
+        .doc-header img {
+            height: 70px;
+            width: auto;
+        }
+
+        .doc-header-info {
+            text-align: right;
+            font-size: 10px;
+            color: #555;
+            line-height: 1.5;
+        }
+
         .content {
-            position: relative;
-            z-index: 1;
-            padding: 140px 70px 160px 70px;
+            padding: 24px 40px 40px 40px;
+        }
+
+        @media print {
+            .doc-header {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            table.inventory th {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
         }
 
         .doc-title {
@@ -153,6 +179,14 @@
 
 <div class="page">
 
+    {{-- Header con logo --}}
+    <div class="doc-header">
+        <img src="{{ asset('images/letterhead/zooma-logo.png') }}" alt="Logo">
+        <div class="doc-header-info">
+            Generado: {{ \Carbon\Carbon::now()->format('d/m/Y H:i') }}
+        </div>
+    </div>
+
     <div class="content">
 
         {{-- Título --}}
@@ -199,7 +233,7 @@
                         <td>{{ (($asset->model) && ($asset->model->category)) ? $asset->model->category->name : '' }}</td>
                         <td>{{ ($asset->model) ? $asset->model->name : '' }}</td>
                         <td>{{ $asset->serial }}</td>
-                        <td>{{ $asset->purchase_cost ? '$'.number_format($asset->purchase_cost, 2) : '' }}</td>
+                        <td>{{ $asset->purchase_cost ? 'S/ '.number_format($asset->purchase_cost, 2) : '' }}</td>
                     </tr>
                     @php $counter++; @endphp
                 @endforeach
