@@ -218,6 +218,7 @@
                         <th>Asset Tag</th>
                         <th>Categoría</th>
                         <th>Modelo</th>
+                        <th>Model No.</th>
                         <th>Serie</th>
                         <th>Costo</th>
                     </tr>
@@ -232,6 +233,7 @@
                         <td>{{ $asset->asset_tag }}</td>
                         <td>{{ (($asset->model) && ($asset->model->category)) ? $asset->model->category->name : '' }}</td>
                         <td>{{ ($asset->model) ? $asset->model->name : '' }}</td>
+                        <td>{{ ($asset->model) ? $asset->model->model_number : '' }}</td>
                         <td>{{ $asset->serial }}</td>
                         <td>{{ $asset->purchase_cost ? 'S/ '.number_format($asset->purchase_cost, 2) : '' }}</td>
                     </tr>
