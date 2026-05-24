@@ -201,7 +201,7 @@
                 , con DNI <strong>{{ $show_user->employee_num }}</strong>
             @endif
             @if ($show_user->company)
-                , empleado(a) de <strong>{{ $show_user->company->name }}</strong> identificada con RUC <strong>20613034952</strong>
+                , empleado(a) de <strong>{{ $show_user->company->name }}</strong> identificada con RUC <strong>{{ $show_user->company->ruc }}</strong>
             @endif
             , autorizo a la empresa a realizar un descuento en mi remuneración en caso de pérdida,
             daño irreparable o no devolución de los equipos tecnológicos que se me entrega el día de hoy,
