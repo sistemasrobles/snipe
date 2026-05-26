@@ -276,7 +276,8 @@
             <div class="sig-block">
                 <div class="sig-line"></div>
                 <div class="sig-label">Firma del colaborador</div>
-                <div class="sig-fecha">Fecha: {{ \Carbon\Carbon::now()->format('d/m/Y') }}</div>
+                <div class="sig-fecha">Fecha: 01/06/26</div>
+                <!-- <div class="sig-fecha">Fecha: {{ \Carbon\Carbon::now()->format('d/m/Y') }}</div>-->
             </div>
             <div class="sig-block">
                 <div class="sig-line"></div>
