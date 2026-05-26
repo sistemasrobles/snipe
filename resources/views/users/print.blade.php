@@ -205,7 +205,8 @@
             @endif
             , autorizo a la empresa a realizar un descuento en mi remuneración en caso de pérdida,
             daño irreparable o no devolución de los equipos tecnológicos que se me entrega el día de hoy,
-            <strong>{{ \Carbon\Carbon::now()->translatedFormat('d \d\e F \d\e Y') }}</strong>, consistente en:
+            <strong>01 de junio del 2026</strong>, consistente en:
+           <!--<strong>{{ \Carbon\Carbon::now()->translatedFormat('d \d\e F \d\e Y') }}</strong>, consistente en:  -->
         </p>
 
         {{-- Tabla de activos --}}
