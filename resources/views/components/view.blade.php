@@ -18,6 +18,12 @@
       </button>
       
       <ul class="dropdown-menu pull-right" role="menu22">
+        <li role="menuitem">
+          <a href="{{ route('components.label', $component->id) }}" target="_blank">
+            <i class="fa fa-barcode"></i> Imprimir Label
+          </a>
+        </li>
+        <li class="divider"></li>
         @if ($component->assigned_to != '')
           @can('checkin', $component)
           <li role="menuitem">

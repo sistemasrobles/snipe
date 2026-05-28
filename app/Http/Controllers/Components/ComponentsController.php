@@ -228,4 +228,43 @@ class ComponentsController extends Controller
             $this->authorize('view', $component);
             return view('components/view', compact('component'));
     }
+
+    public function getQrCode($component_id)
+    {
+        $component = Component::findOrFail($component_id);
+        $this->authorize('view', $component);
+
+        $qr_file = public_path('uploads/barcodes/qr-component-'.$component->id.'.png');
+
+        if (file_exists($qr_file)) {
+            return response()->file($qr_file, ['Content-type' => 'image/png']);
+        }
+
+        $barcode = new \Com\Tecnick\Barcode\Barcode();
+        $barcode_obj = $barcode->getBarcodeObj('QRCODE,H', url('/components/'.$component->id), 200, 200, 'black', [-2, -2, -2, -2]);
+        file_put_contents($qr_file, $barcode_obj->getPngData());
+
+        return response($barcode_obj->getPngData())->header('Content-type', 'image/png');
+    }
+
+    public function getLabel($component_id)
+    {
+        $component = Component::findOrFail($component_id);
+        $this->authorize('view', $component);
+
+        $barcode_value = trim(($component->serial ?? '') . ' ' . ($component->model_number ?? ''));
+        if (empty($barcode_value)) {
+            $barcode_value = 'COMP-' . $component->id;
+        }
+
+        try {
+            $barcode = new \Com\Tecnick\Barcode\Barcode();
+            $barcode_obj = $barcode->getBarcodeObj('C128', $barcode_value, 300, 50);
+            $barcode_base64 = base64_encode($barcode_obj->getPngData());
+        } catch (\Exception $e) {
+            $barcode_base64 = '';
+        }
+
+        return view('components/label', compact('component', 'barcode_base64', 'barcode_value'));
+    }
 }

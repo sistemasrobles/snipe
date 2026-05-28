@@ -32,3 +32,11 @@ Route::resource('components', Components\ComponentsController::class, [
     'middleware' => ['auth'],
     'parameters' => ['component' => 'component_id'],
 ]);
+
+Route::get('components/{component_id}/qr', [Components\ComponentsController::class, 'getQrCode'])
+    ->middleware(['auth'])
+    ->name('components.qr');
+
+Route::get('components/{component_id}/label', [Components\ComponentsController::class, 'getLabel'])
+    ->middleware(['auth'])
+    ->name('components.label');
